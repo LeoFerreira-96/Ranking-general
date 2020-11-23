@@ -10,33 +10,36 @@
         v-bind="{ [`xs${card.flex}`]: true }"
       >
         <v-card>
-          <div height="350px"
-          >
-          <v-list>
-            
-          </v-list>
-            <v-container
-              fill-height
-              fluid
-            >
-              <v-layout fill-height>
-                <v-flex xs12 align-end flexbox>
-                  <span class="headline white--text" v-text="card.title"></span>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </div>
+          <v-card-text class="text-center">
+            <span class="headline" >{{card.title}}</span>
+          </v-card-text>
 
           <v-card-actions>
-            <v-btn flat color="primary">Explorar</v-btn>
-            <v-spacer></v-spacer>
             <v-btn icon>
-              <v-icon>mdi-bookmark</v-icon>
+              <v-icon>mdi-plus</v-icon>
+            </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon v-if="card.fav" @click="card.fav = !card.fav">
+              <v-icon color="yellow">mdi-bookmark</v-icon>
+            </v-btn>
+            <v-btn icon v-else @click="card.fav = !card.fav">
+              <v-icon >mdi-bookmark</v-icon>
             </v-btn>
             <v-btn icon>
               <v-icon>mdi-share</v-icon>
             </v-btn>
+            <v-spacer></v-spacer>
+            <v-btn icon v-if="card.show" @click="card.show = !card.show">
+              <v-icon>mdi-chevron-up</v-icon>
+            </v-btn>
+            <v-btn icon v-else @click="card.show = !card.show">
+              <v-icon>mdi-chevron-down</v-icon>
+            </v-btn>
           </v-card-actions>
+
+          <v-card-text v-show="card.show" v-for="list in card.list" :key="list.item">
+            {{list.item}}
+          </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
@@ -49,10 +52,41 @@
 
     data: () => ({
       cards: [
-        { title: 'Teste', list: ["nome1", "nome2","nome3"], flex: 3 },
-        { title: 'Favorite Teste', list: ["Teste1", "Teste2","Teste3"], flex: 3 },
-        { title: 'Best Teste', list: ["Casa1", "Casa2","Casa3"], flex: 3 }
-      ]
-    })
+        { title: 'Name Teste',
+          flex: 4,
+          fav: true,
+          show: false,
+          list: [
+            {item:"nome 1"},
+            { item:"nome 2"},
+            {item:"nome 3"}
+          ],
+        },
+        { title: 'Favorite Teste',
+          flex: 4,
+          fav: false,
+          show: true,
+          list: [
+            {item:"favorito 1"},
+            { item:"favorito 2"},
+            {item:"favorito 3"}
+          ],
+        },
+        { title: 'House Teste',
+          flex: 4,
+          fav: false,
+          show: false,
+          list: [
+            {item:"casa 1"},
+            { item:"casa 2"},
+            {item:"casa 3"}
+          ],
+        },
+      ],
+    }),
+
+    methods: {
+
+    }
   }
 </script>
