@@ -5,14 +5,11 @@
       color="primary"
       dark
     >
-      <span class="mr-2">RANKING GENERAL</span>
+      <span class="mr-2">Logo Ranking General</span>
 
       <v-spacer></v-spacer>
       
-      <v-btn
-        text
-      >
-        <span class="mr-2">Perfil</span>
+      <v-btn icon class="ma-3">
         <v-icon>mdi-account</v-icon>
       </v-btn>
     </v-app-bar>
